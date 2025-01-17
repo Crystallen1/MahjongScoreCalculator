@@ -1,0 +1,6 @@
+/**app.wxss**/
+page {
+  --primary-color: #4CAF50;
+  --border-color: #ddd;
+  background: #f6f6f6;
+} 

@@ -1,0 +1,195 @@
+/**index.wxss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.mahjong-calculator {
+  padding: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 20rpx 0;
+  display: block;
+}
+
+.tile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.tile-group {
+  border: 1rpx solid #ddd;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}
+
+.group-title {
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.tile-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.tile-button {
+  width: 80rpx !important;
+  height: 80rpx;
+  padding: 0;
+  margin: 5rpx;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  margin: 20rpx 0;
+}
+
+.number-input {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.number-input input {
+  width: 100rpx;
+  border: 1rpx solid #ddd;
+  padding: 5rpx;
+}
+
+.calculate-button {
+  margin: 40rpx 0;
+  background: #4CAF50;
+  color: white;
+}
+
+.score-display {
+  border: 1rpx solid #ddd;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin: 20rpx 0;
+}
+
+.yaku-list {
+  margin-top: 20rpx;
+}
+
+.selected-tiles {
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background: white;
+  border-radius: 10rpx;
+}
+
+.tile-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.selected-tile {
+  width: 60rpx;
+  height: 80rpx;
+  background: #e8f5e9;
+  border: 1rpx solid var(--primary-color);
+  border-radius: 6rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+}
+
+.selected-tiles-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.clear-button {
+  color: #ff4444;
+  font-size: 28rpx;
+}
+
+.naki-buttons {
+  margin: 20rpx 0;
+}
+
+.button-group {
+  display: flex;
+  gap: 20rpx;
+}
+
+.naki-button {
+  flex: 1;
+  font-size: 28rpx;
+  background: var(--primary-color);
+  color: white;
+}
+
+.naki-display {
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background: white;
+  border-radius: 10rpx;
+}
+
+.naki-group {
+  display: flex;
+  align-items: center;
+  margin: 10rpx 0;
+}
+
+.naki-type {
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 20rpx;
+}
+
+.naki-tile {
+  background: #fff3e0;
+  border-color: #ff9800;
+  transform: rotate(-10deg);
+}
+
+.target-selector {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+}
+
+.target-selector button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.target-selector button.active {
+  background-color: #007AFF;
+  color: white;
+}

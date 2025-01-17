@@ -1,0 +1,221 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="mahjong-calculator">
+      <!-- 已选择的手牌 -->
+      <view class="selected-tiles">
+        <view class="tile-section">
+          <text class="section-title">暗手</text>
+          <view class="tile-list">
+            <view wx:for="{{concealedTiles}}" 
+                  wx:key="index" 
+                  class="selected-tile"
+                  bindlongpress="removeTile"
+                  data-index="{{index}}"
+                  data-target="concealed">
+              {{item.type === 'JIHAI' ? jihaiTypes[item.value] : item.number + (
+                item.type === 'MANZU' ? '万' :
+                item.type === 'PINZU' ? '筒' : '索'
+              )}}
+            </view>
+          </view>
+        </view>
+
+        <view class="tile-section">
+          <text class="section-title">副露</text>
+          <view class="tile-list">
+            <view wx:for="{{meldedTiles}}" 
+                  wx:key="index"
+                  class="selected-tile"
+                  bindlongpress="removeTile"
+                  data-index="{{index}}"
+                  data-target="melded">
+              {{item.type === 'JIHAI' ? jihaiTypes[item.value] : item.number + (
+                item.type === 'MANZU' ? '万' :
+                item.type === 'PINZU' ? '筒' : '索'
+              )}}
+            </view>
+          </view>
+        </view>
+
+        <view class="tile-section">
+          <text class="section-title">和了牌</text>
+          <view class="tile-list">
+            <view wx:if="{{winningTile}}"
+                  class="selected-tile"
+                  bindlongpress="removeTile"
+                  data-target="winning">
+              {{winningTile.type === 'JIHAI' ? jihaiTypes[winningTile.value] : winningTile.number + (
+                winningTile.type === 'MANZU' ? '万' :
+                winningTile.type === 'PINZU' ? '筒' : '索'
+              )}}
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="hand-input">
+        <text class="section-title">手牌输入</text>
+        <view class="target-selector">
+          <button class="{{currentTarget === 'concealed' ? 'active' : ''}}"
+                  bindtap="switchTarget"
+                  data-target="concealed">
+            暗手
+          </button>
+          <button class="{{currentTarget === 'melded' ? 'active' : ''}}"
+                  bindtap="switchTarget"
+                  data-target="melded">
+            副露
+          </button>
+          <button class="{{currentTarget === 'winning' ? 'active' : ''}}"
+                  bindtap="switchTarget"
+                  data-target="winning">
+            和了牌
+          </button>
+        </view>
+
+        <view class="tile-section">
+          <!-- 万子 -->
+          <view class="tile-group">
+            <text class="group-title">万子</text>
+            <view class="tile-buttons">
+              <button wx:for="{{[1,2,3,4,5,6,7,8,9]}}" 
+                      wx:key="*this"
+                      class="tile-button"
+                      data-type="{{tileTypes.MANZU}}"
+                      data-number="{{item}}"
+                      bindtap="handleTileSelect">
+                {{item}}万
+              </button>
+            </view>
+          </view>
+
+          <!-- 筒子 -->
+          <view class="tile-group">
+            <text class="group-title">筒子</text>
+            <view class="tile-buttons">
+              <button wx:for="{{[1,2,3,4,5,6,7,8,9]}}"
+                      wx:key="*this"
+                      class="tile-button"
+                      data-type="{{tileTypes.PINZU}}"
+                      data-number="{{item}}"
+                      bindtap="handleTileSelect">
+                {{item}}筒
+              </button>
+            </view>
+          </view>
+
+          <!-- 索子 -->
+          <view class="tile-group">
+            <text class="group-title">索子</text>
+            <view class="tile-buttons">
+              <button wx:for="{{[1,2,3,4,5,6,7,8,9]}}"
+                      wx:key="*this"
+                      class="tile-button"
+                      data-type="{{tileTypes.SOUZU}}"
+                      data-number="{{item}}"
+                      bindtap="handleTileSelect">
+                {{item}}索
+              </button>
+            </view>
+          </view>
+
+          <!-- 字牌 -->
+          <view class="tile-group">
+            <text class="group-title">字牌</text>
+            <view class="tile-buttons">
+              <button wx:for="{{['EAST', 'SOUTH', 'WEST', 'NORTH', 'WHITE', 'GREEN', 'RED']}}"
+                      wx:key="*this"
+                      class="tile-button"
+                      data-type="{{tileTypes.JIHAI}}"
+                      data-value="{{item}}"
+                      bindtap="handleTileSelect">
+                {{jihaiTypes[item]}}
+              </button>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="options-input">
+        <text class="section-title">和牌选项</text>
+        <view class="options-grid">
+          <checkbox-group bindchange="handleOptionChange" data-field="isTsumo">
+            <checkbox value="{{true}}">自摸</checkbox>
+          </checkbox-group>
+
+          <checkbox-group bindchange="handleOptionChange" data-field="isRiichi">
+            <checkbox value="{{true}}">立直</checkbox>
+          </checkbox-group>
+
+          <checkbox-group bindchange="handleOptionChange" data-field="isDoubleRiichi">
+            <checkbox value="{{true}}">双立直</checkbox>
+          </checkbox-group>
+
+          <checkbox-group bindchange="handleOptionChange" data-field="isIppatsu">
+            <checkbox value="{{true}}">一发</checkbox>
+          </checkbox-group>
+
+          <view class="number-input">
+            <text>宝牌数：</text>
+            <input type="number" 
+                   value="{{options.doraCount}}"
+                   data-field="doraCount"
+                   bindchange="handleOptionChange"/>
+          </view>
+
+          <view class="number-input">
+            <text>里宝牌数：</text>
+            <input type="number"
+                   value="{{options.uradoraCount}}"
+                   data-field="uradoraCount"
+                   bindchange="handleOptionChange"/>
+          </view>
+
+          <picker bindchange="handleOptionChange"
+                  data-field="seatWind"
+                  value="{{windValues.indexOf(options.seatWind)}}"
+                  range="{{windDisplayValues}}">
+            <view>自风：{{jihaiTypes[options.seatWind]}}</view>
+          </picker>
+
+          <picker bindchange="handleOptionChange"
+                  data-field="roundWind"
+                  value="{{windValues.indexOf(options.roundWind)}}"
+                  range="{{windDisplayValues}}">
+            <view>场风：{{jihaiTypes[options.roundWind]}}</view>
+          </picker>
+
+          <checkbox-group bindchange="handleOptionChange" data-field="isDealer">
+            <checkbox value="{{true}}">庄家</checkbox>
+          </checkbox-group>
+
+        </view>
+      </view>
+
+      <button class="calculate-button" bindtap="calculateScore">计算点数</button>
+
+      <view class="score-display" wx:if="{{score}}">
+        <text class="section-title">计算结果</text>
+        <view class="score">
+          <block wx:if="{{score.total.dealerPay}}">
+            <text>自摸时：</text>
+            <text>庄家支付：{{score.total.dealerPay}}</text>
+            <text>闲家支付：{{score.total.nonDealerPay}}</text>
+          </block>
+          <block wx:else>
+            <text>总点数：{{score.total}}</text>
+          </block>
+          <text>番数：{{score.han}}</text>
+          <text>符数：{{score.fu}}</text>
+        </view>
+        <view class="yaku-list">
+          <text class="section-title">成立役种：</text>
+          <view wx:for="{{yaku}}" wx:key="name">
+            {{item.name}} ({{item.han}}番)
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

@@ -1,0 +1,75 @@
+.mahjong-calculator {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hand-input {
+  margin-bottom: 20px;
+}
+
+.tile-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.tile-group {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.tile-button {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border: 1px solid #666;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+.tile-button:hover {
+  background: #f0f0f0;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.number-input, .select-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calculate-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.score-display {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.yaku-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.yaku-list li {
+  margin: 5px 0;
+} 
